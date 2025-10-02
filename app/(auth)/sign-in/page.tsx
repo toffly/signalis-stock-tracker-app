@@ -6,7 +6,7 @@ import {Button} from "@/components/ui/button";
 import FooterLink from "@/components/forms/FooterLink";
 
 const SignIn = () => {
-    const {register, handleSubmit, control, formState: {errors, isSubmitting}} = useForm<SignUpFormData>({
+    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<SignInFormData>({
         defaultValues: {
             email: '',
             password: '',
@@ -14,7 +14,7 @@ const SignIn = () => {
         mode: 'onBlur'
     },);
 
-    const onSubmit = async (data: SignUpFormData) => {
+    const onSubmit = async (data: SignInFormData) => {
         try {
             console.log(data)
         } catch (e) {
@@ -30,21 +30,18 @@ const SignIn = () => {
                 <InputField
                     name="email"
                     label="Email"
-                    placeholder="Enter your Email"
+                    placeholder="contact@jsmastery.com"
                     register={register}
                     error={errors.email}
-                    validation={{
-                        required: 'Email name is required',
-                        pattern: /^\w+@\w+\.\w+$/,
-                        message: 'Email address is required'
-                    }}/>
+                    validation={{ required: 'Email is required', pattern: /^\w+@\w+\.\w+$/ }}
+                />
                 < InputField
                     name="password"
                     label="Password"
                     placeholder="Enter a strong password"
                     register={register}
                     error={errors.password}
-                    validation={{required: 'Password  is required', minLength: 2}}/>
+                    validation={{ required: 'Password is required', minLength: 8 }}/>
 
                 <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-5">
                     {isSubmitting ? 'Creating account' : 'Start Your Investing Journey'}
